@@ -3,6 +3,8 @@ import { HomeComponent } from './home/home.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ProductoComponent } from './producto/producto.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { FacultadComponent } from './facultad/facultad.component';
+import { EscuelaComponent } from './escuela/escuela.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +26,17 @@ export const routes: Routes = [
         path:'producto',
         component:ProductoComponent,
         title:'Producto'
+    },
+    {
+        path:'facultad',
+        component:FacultadComponent,
+        title:'Facultad'
+    }
+    ,
+    {
+        path:'escuela',
+        component:EscuelaComponent,
+        title:'Escuela'
     }
 
 ];
