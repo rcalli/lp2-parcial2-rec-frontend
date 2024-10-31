@@ -6,12 +6,15 @@ import { Escuela } from './models/escuela';
 import { EscuelaService } from './services/escuela.service';
 import { FacultadService } from '../facultad/services/facultad.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2'
+import bootstrap from 'bootstrap';
 
-
+declare var window:any;
 @Component({
   selector: 'app-escuela',
   standalone: true,
-  imports: [CardComponent, NavbarComponent, CommonModule],
+  imports: [CardComponent, NavbarComponent, CommonModule,FormsModule],
   templateUrl: './escuela.component.html',
   styleUrl: './escuela.component.css'
 })
@@ -28,6 +31,8 @@ export class EscuelaComponent {
   visible: boolean = false; 
   isDeleteInProgress: boolean = false;
   modal:any;
+  forModal:any;
+  
   constructor(
     private escuelaService: EscuelaService,
     private facultaService: FacultadService
@@ -35,6 +40,9 @@ export class EscuelaComponent {
   ngOnInit():void{
     this.listarFacultades();
     this.listarEscuelas();
+   this.forModal = new window.bootstrap.Modal(
+    document.getElementById("exampleModal")
+   );
   }
   listarFacultades(){
     this.facultaService.getFacultades().subscribe((data)=>{
@@ -47,7 +55,35 @@ export class EscuelaComponent {
     });
   }
   mostrar(){
-    
+    this.forModal.show();    
   }
-  
+  showDialogEdit(id:number) {
+   this.escuelaService.getEscuelaById(id).subscribe((data)=>{
+      this.escuela=data;  
+   });    
+
+  }
+  deleteEscuela(id: number) {
+    this.escuelaService.deleteEscuela(id).subscribe({
+        next:()=>{
+          this.listarEscuelas();
+        }
+    });     
+  }
+  addEscuela():void{ 
+    this.escuelaService.createEscuela(this.escuela).subscribe({
+            next:()=>{
+                  this.listarEscuelas();
+            }
+            
+    });          
+        this.forModal.hide();
+  }
+  editEscuela(){
+    this.escuelaService.updateEscuela(this.escuela,this.escuela.id).subscribe({
+        });
+        this.listarEscuelas();        
+        this.op=0;    
+        this.visible = false;
+  }
 }
