@@ -5,6 +5,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { FacultadComponent } from './facultad/facultad.component';
 import { EscuelaComponent } from './escuela/escuela.component';
+import { CocheComponent } from './coche/coche.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +38,12 @@ export const routes: Routes = [
         path:'escuela',
         component:EscuelaComponent,
         title:'Escuela'
+    },
+    {
+        path:'coche',
+        component:CocheComponent,
+        title:'Coche'
     }
+
 
 ];

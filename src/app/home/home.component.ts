@@ -10,6 +10,6 @@ import { CardComponent } from '../card/card.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  titulo='Bienvenido al Examen';
+  titulo='Bienvenido al Examen de recuperacion';
   icono='fa-solid fa-house';
 }
